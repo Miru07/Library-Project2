@@ -5,13 +5,13 @@
 	xmlns:smartTable="sap.ui.comp.smarttable"
 	xmlns:html="http://www.w3.org/1999/xhtml"
 	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
-	controllerName="org.ubb.books.controller.BurrowedBook"
+	controllerName="org.ubb.books.controller.BurrowedBookTable"
 	height="100%">
 
 	<!-- table occupies the available screen height -->
 	<VBox fitContainer="true">
 		<smartFilterBar:SmartFilterBar id="smartFilterBar"
-			entitySet="Books" persistencyKey="SmartFilter_Explored">
+			entitySet="BurrowedBooks" persistencyKey="SmartFilter_Explored">
 			<!-- layout for table growing but the filter bar fixed -->
 			<smartFilterBar:layoutData>
 				<FlexItemData shrinkFactor="0" />
@@ -21,7 +21,8 @@
 			smartFilterId="smartFilterBar" useExportToExcel="true" beforeExport="onBeforeExport"
 			useVariantManagement="false" useTablePersonalisation="true" header="Products"
 			showRowCount="true" persistencyKey="SmartTableRefApp_Explored"
-			enableAutoBinding="true" class="sapUiResponsiveContentPadding">
+			enableAutoBinding="true" class="sapUiResponsiveContentPadding"
+			initiallyVisibleFields="ISBN,Author,Title,Published,Language,AvailableNr">
 			<!-- layout for table growing but the filter bar fixed -->
 			<smartTable:layoutData>
 				<FlexItemData growFactor="1" baseSize="0%" />
