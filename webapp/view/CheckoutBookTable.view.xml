@@ -1,0 +1,56 @@
+<mvc:View
+  	controllerName="org.ubb.books.controller.CheckoutBookTable"
+    xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+
+   <Table id="deleteBookTable"
+		items="{
+			path: '/CheckoutBooks',
+			sorter: {
+				path: 'Title'
+			}
+		}"
+		growing="true"
+		growingThreshold="10">
+
+		<columns>
+			<Column>
+				<Text text="Title" />
+			</Column>
+			<Column>
+				<Text text="Author" />
+			</Column>
+			<Column>
+				<Text text="Published on" />
+			</Column>
+			<Column>
+				<Text text="Language" />
+			</Column>
+            <Column>
+				<Text text="Available books" />
+			</Column>
+			<Column>
+				<Text text="Total" />
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<ObjectIdentifier
+						title="{Title}"
+						text="{ISBN}"/>
+					<Text text="{Author}" />
+					<Text text="{ 
+							path: 'Published',
+							type: 'sap.ui.model.type.Date'
+               			}" 
+					/>
+					<Text text="{Language}" />
+					<Text text="{= parseInt(${Available}) }" /> />
+				</cells>
+				<!-- Button that becomes available only whe available > 0-->
+			</ColumnListItem>
+		</items>
+	</Table>
+</mvc:View>

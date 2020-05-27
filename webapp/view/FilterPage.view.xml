@@ -1,0 +1,20 @@
+<mvc:View
+    controllerName="org.ubb.books.controller.FilterPage"
+    xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+		<Label text="ISBN"/>
+		<Input id="isbn" placeholder="Enter here isbn" maxLength="13"/>
+		<Label text="Title"/>
+		<Input id="title" placeholder="Enter here title"/>
+		<Label text="Author"/>
+		<Input id="author" placeholder="Enter here author"/>
+		<Label text="Language"/>
+		<Input id="language" placeholder="Enter here language"/>
+        <Label text="Begin"/>
+		<DatePicker id="publishedDate" displayFormat="short" change="handleChange" class="sapUiSmallMarginBottom"/>
+        <Label text="End"/>
+		<DatePicker id="publishedDate" displayFormat="short" change="handleChange" class="sapUiSmallMarginBottom"/>
+		<Label/>
+		<Button text="{i18n>filterBooksButton}" type="Accept" press="handleSaveBtnBook"></Button>
+</mvc:View>
