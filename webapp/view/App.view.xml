@@ -8,7 +8,7 @@
 			<pages>
 				<Page title="{i18n>homePageTitle}">
 					<content>
-						<mvc:XMLView viewName="org.ubb.books.view.FilterPage"/>
+						<mvc:XMLView viewName="org.ubb.books.view.CheckoutBookTable"/>
 					</content>
 				</Page>
 			</pages>

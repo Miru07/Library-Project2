@@ -12,9 +12,9 @@
 		<Label text="Language"/>
 		<Input id="language" placeholder="Enter here language"/>
         <Label text="Begin"/>
-		<DatePicker id="publishedDate" displayFormat="short" change="handleChange" class="sapUiSmallMarginBottom"/>
+		<DatePicker id="minPublishedDate" displayFormat="short" change="handleChange" class="sapUiSmallMarginBottom"/>
         <Label text="End"/>
-		<DatePicker id="publishedDate" displayFormat="short" change="handleChange" class="sapUiSmallMarginBottom"/>
+		<DatePicker id="maxPublishedDate" displayFormat="short" change="handleChange" class="sapUiSmallMarginBottom"/>
 		<Label/>
 		<Button text="{i18n>filterBooksButton}" type="Accept" press="handleSaveBtnBook"></Button>
 </mvc:View>

@@ -4,7 +4,7 @@
 	xmlns:core="sap.ui.core"
 	xmlns="sap.m">
 
-   <Table id="deleteBookTable"
+   <Table id="checkoutBookTable"
 		items="{
 			path: '/CheckoutBooks',
 			sorter: {
@@ -30,9 +30,6 @@
             <Column>
 				<Text text="Available books" />
 			</Column>
-			<Column>
-				<Text text="Total" />
-			</Column>
 		</columns>
 		<items>
 			<ColumnListItem>
@@ -47,7 +44,7 @@
                			}" 
 					/>
 					<Text text="{Language}" />
-					<Text text="{= parseInt(${Available}) }" /> />
+					<Text text="{= parseInt(${Available}) }" />
 				</cells>
 				<!-- Button that becomes available only whe available > 0-->
 			</ColumnListItem>
