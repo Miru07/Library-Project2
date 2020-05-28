@@ -3,3 +3,11 @@
 	border-style: solid;
 	border-width: 0.0625em;
 }
+
+.cell_Color_Green {
+	background-color: greenyellow;
+}
+
+.cell_Color_Red {
+	background-color: red;
+}

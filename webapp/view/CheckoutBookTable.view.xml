@@ -12,7 +12,29 @@
 			}
 		}"
 		growing="true"
-		growingThreshold="10">
+		growingThreshold="10"
+		mode="SingleSelectLeft"
+		updateFinished="onUpdateFinished">
+
+		<headerToolbar>
+			<OverflowToolbar>
+				<content>
+					  <Button
+						text="Book a book"
+						press="onBookBook"/>
+					<ToolbarSpacer />
+					<ToggleButton id="toggleInfoToolbar"
+					  text="Hide/Show InfoToolbar"
+					  press="onToggleInfoToolbar" />
+				</content>
+			</OverflowToolbar>
+		</headerToolbar>
+
+		<infoToolbar>
+			<OverflowToolbar>
+				<Label text="If red -> no booking allowed"/>
+			</OverflowToolbar>
+		</infoToolbar>
 
 		<columns>
 			<Column>
@@ -46,7 +68,6 @@
 					<Text text="{Language}" />
 					<Text text="{= parseInt(${Available}) }" />
 				</cells>
-				<!-- Button that becomes available only whe available > 0-->
 			</ColumnListItem>
 		</items>
 	</Table>
