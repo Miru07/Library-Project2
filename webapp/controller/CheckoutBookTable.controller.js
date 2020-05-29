@@ -1,9 +1,18 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/m/MessageToast"
- ], function (Controller, MessageToast) {
+    "sap/m/MessageToast",
+    "sap/ui/model/resource/ResourceModel"
+ ], function (Controller, MessageToast, ResourceModel) {
     "use strict";
     return Controller.extend("org.ubb.books.controller.CheckoutBookTable", {
+
+      onInit : function () {
+         // set i18n model on view
+         var i18nModel = new ResourceModel({
+            bundleName: "org.ubb.books.i18n.i18n"
+         });
+         this.getView().setModel(i18nModel, "i18n");
+      },
 
       onToggleInfoToolbar(oEvent) {
 			var oTable = this.byId("checkoutBookTable");
@@ -22,7 +31,6 @@ sap.ui.define([
 
             if(parseInt( oItems[i].getCells(0)[4].getText()) === 0) {
                oItems[i].getCells()[0].$().addClass("cell_Color_Red");
-               console.log(parseInt( oItems[i].getCells(0)[4].getText()));
             }
             else {
                oItems[i].getCells()[0].$().addClass("cell_Color_Green");
@@ -31,48 +39,52 @@ sap.ui.define([
       },
 
       onBookBook(oEvent) {
-         
-            
             const aSelectedContexts = this.byId("checkoutBookTable").getSelectedContexts();
             const sPath = aSelectedContexts[0].getPath();
 
             var selRow = this.byId("checkoutBookTable").getModel().getProperty(sPath);
             var availableVal = parseInt(selRow.Available);
 
+            var oBundle = this.getView().getModel("i18n").getResourceBundle();
+            var sRecipient = this.getView().getModel().getProperty("/recipient/name");
+            var successMsg = oBundle.getText("checkoutSuccess", [sRecipient]);
+            var errorBackMsg = oBundle.getText("checkoutBackError", [sRecipient]);
+            var errorFrontMsg = oBundle.getText("checkoutFrontError", [sRecipient]);
+
             if(availableVal > 0 ) {
                selRow.Available = parseInt(selRow.Available) - 1;
 
                var oBook =  {
-                  ISBN: "",
+                  ISBN: selRow.ISBN,
                   Title: "",
                   Author: "",
-                  Published: null,
+                  Published: selRow.Published,
                   Language: "",
-                  Available: 0
+                  Available: ""
               };
 
-              oBook.ISBN = selRow.ISBN;
-              oBook.Title = selRow.Title;
-              oBook.Author = selRow.Author;
-              oBook.Published = selRow.Published;
-              oBook.Language = selRow.Language;
-              oBook.Available = selRow.Available;
-
-               this.getView().getModel().update(sPath, oBook, {
+               this.getView().getModel().create("/CheckoutBooks", oBook, {
                   success: function () {
-                     MessageToast.show("Booked! :)");
+                     MessageToast.show(successMsg);
                   },
                   error: function () {
-                     MessageToast.show("Error from the dark side :(");
+                     MessageToast.show(errorBackMsg);
                   }
                }); 
             } else {
-               MessageToast.show("That book is kinda red. Can not book... :(");
+               MessageToast.show(errorFrontMsg);
             }
- 
-
-            
+      }, 
+     
+      filtering : function(value) {
+         var oFilter1 = new sap.ui.model.Filter("ISBN", sap.ui.model.FilterOperator.Contains, value);
+         var oFilter2 = new sap.ui.model.Filter("Author", sap.ui.model.FilterOperator.Contains, value);
+         var oFilter3 = new sap.ui.model.Filter("Title", sap.ui.model.FilterOperator.Contains, value);
+         var oFilter4 = new sap.ui.model.Filter("Published", sap.ui.model.FilterOperator.Contains, value);
+         var oFilter5 = new sap.ui.model.Filter("Language", sap.ui.model.FilterOperator.Contains, value);
+         var allFilter = new sap.ui.model.Filter([oFilter1, oFilter2, oFilter3, oFilter4, oFilter4], false); 
+         var oBinding = oEvent.getSource().getBinding("items");
+         oBinding.filter(allFilter);
       }
-   
     });
  });

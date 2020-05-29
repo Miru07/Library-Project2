@@ -20,11 +20,11 @@
 			<OverflowToolbar>
 				<content>
 					  <Button
-						text="Book a book"
+						text="{i18n>bookBook}"
 						press="onBookBook"/>
 					<ToolbarSpacer />
 					<ToggleButton id="toggleInfoToolbar"
-					  text="Hide/Show InfoToolbar"
+					  text="{i18n>infoToolbar}"
 					  press="onToggleInfoToolbar" />
 				</content>
 			</OverflowToolbar>
@@ -32,25 +32,25 @@
 
 		<infoToolbar>
 			<OverflowToolbar>
-				<Label text="If red -> no booking allowed"/>
+				<Label text="{i18n>bookWarning}"/>
 			</OverflowToolbar>
 		</infoToolbar>
 
 		<columns>
 			<Column>
-				<Text text="Title" />
+				<Text text="{i18n>title}" />
 			</Column>
 			<Column>
-				<Text text="Author" />
+				<Text text="{i18n>author}" />
 			</Column>
 			<Column>
-				<Text text="Published on" />
+				<Text text="{i18n>published}" />
 			</Column>
 			<Column>
-				<Text text="Language" />
+				<Text text="{i18n>lang}" />
 			</Column>
             <Column>
-				<Text text="Available books" />
+				<Text text="{i18n>available}" />
 			</Column>
 		</columns>
 		<items>
@@ -62,7 +62,7 @@
 					<Text text="{Author}" />
 					<Text text="{ 
 							path: 'Published',
-							type: 'sap.ui.model.type.Date'
+							type: 'sap.ui.model.type.DateTime'
                			}" 
 					/>
 					<Text text="{Language}" />
