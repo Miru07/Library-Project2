@@ -19,13 +19,17 @@
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
-					  <Button
-						text="{i18n>bookBook}"
-						press="onBookBook"/>
-					<ToolbarSpacer />
-					<ToggleButton id="toggleInfoToolbar"
-					  text="{i18n>infoToolbar}"
-					  press="onToggleInfoToolbar" />
+				<Input id="inputISBN" width="10%" placeholder="ISBN"/>
+				<Input id="inputTitle" width="10%" placeholder="{i18n>title}"/>
+				<Input id="inputAuthor" width="10%" placeholder="{i18n>author}"/>
+				<DatePicker id="inputDateStart" width="10%" value=""/>
+				<DatePicker id="inputDateEnd"   width="10%" value=""/>
+				<Input id="inputLanguage" width="10%" placeholder="{i18n>lang}"/>
+				<Button 
+					text="{i18n>search}"
+					press="onSearchButtonPressed"
+					enabled="true"
+				/>
 				</content>
 			</OverflowToolbar>
 		</headerToolbar>
@@ -33,6 +37,10 @@
 		<infoToolbar>
 			<OverflowToolbar>
 				<Label text="{i18n>bookWarning}"/>
+				<Label/>
+				 <Button
+						text="{i18n>bookBook}"
+						press="onBookBook"/>
 			</OverflowToolbar>
 		</infoToolbar>
 

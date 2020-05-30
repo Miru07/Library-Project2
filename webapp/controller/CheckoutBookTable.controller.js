@@ -1,12 +1,15 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageToast",
-    "sap/ui/model/resource/ResourceModel"
- ], function (Controller, MessageToast, ResourceModel) {
+    "sap/ui/model/resource/ResourceModel",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator"
+ ], function (Controller, MessageToast, ResourceModel, Filter,  FilterOperator) {
     "use strict";
     return Controller.extend("org.ubb.books.controller.CheckoutBookTable", {
 
       onInit : function () {
+
          // set i18n model on view
          var i18nModel = new ResourceModel({
             bundleName: "org.ubb.books.i18n.i18n"
@@ -85,6 +88,40 @@ sap.ui.define([
          var allFilter = new sap.ui.model.Filter([oFilter1, oFilter2, oFilter3, oFilter4, oFilter4], false); 
          var oBinding = oEvent.getSource().getBinding("items");
          oBinding.filter(allFilter);
-      }
+      },
+
+      onSearchButtonPressed(oEvent){
+         // Get the Data from the Inputs
+         var isbn = this.byId("inputISBN").getValue();
+         var title = this.byId("inputTitle").getValue();
+         var author = this.byId("inputAuthor").getValue();
+         var language = this.byId("inputLanguage").getValue();
+         var dateStart = this.byId("inputDateStart").getValue();
+         var dateEnd = this.byId("inputDateEnd").getValue();
+
+         var aFilter = [];
+         var oList = this.getView().byId("checkoutBookTable");
+         var oBinding = oList.getBinding("items");
+
+         // Push set filters
+         if (isbn) {
+             aFilter.push(new Filter("ISBN", FilterOperator.Contains, isbn))
+         }
+         if (author) {
+             aFilter.push(new Filter("Author", FilterOperator.Contains, author));
+         }
+         if (title) {
+             aFilter.push(new Filter("Title", FilterOperator.Contains, title));
+         }
+         if (dateStart && dateEnd) {
+             var filter = new Filter("DatePublished", FilterOperator.BT, dateStart, dateEnd);
+             aFilter.push(filter);
+         }  
+         if (language) {
+             aFilter.push(new Filter("Language", FilterOperator.Contains, language));
+         }
+         oBinding.filter(aFilter);
+     },
+
     });
  });
